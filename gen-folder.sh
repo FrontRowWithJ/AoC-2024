@@ -23,7 +23,8 @@ function make_solution_folder() {
 
 mkdir "day_${DAY_NUMBER}"
 cd "day_${DAY_NUMBER}"
-curl -H "Cookie: session=53616c7465645f5f7ec2582e1ae2ebbb147f62e80cf197cb8e2830001003ce38634f80997a9dee82ff4f9675b2e9841aeff5998ff9268a7c5d365d1802a5880f" \
+
+curl -H "Cookie: $(cat .env)" \
       -o "input.txt" \
       "https://adventofcode.com/2024/day/${DAY_NUMBER}/input"
 
