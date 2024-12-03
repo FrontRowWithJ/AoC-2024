@@ -7,25 +7,14 @@ import (
 )
 
 func main() {
-	input, err := os.ReadFile("../input.txt")
-	if err != nil {
-		panic(err)
-	}
-
-	reg := regexp.MustCompile(`mul\(\d+,\d+\)|do\(\)|don't\(\)`)
-	res := reg.FindAll(input, -1)
+	input, _ := os.ReadFile("../input.txt")
+	strs := regexp.MustCompile(`mul\(\d+,\d+\)|do\(\)|don't\(\)`).FindAllString(string(input), -1)
 	result := 0
 	mulEnabed := true
-	for _, mulStatement := range res {
-		s := string(mulStatement)
-		if s == "do()" {
-			mulEnabed = true
-		} else if s == "don't()" {
-			mulEnabed = false
-		}
-		if mulEnabed {
+	for _, s := range strs {
+		if mulEnabed = s != "don't()" && (mulEnabed || s == "do()"); mulEnabed {
 			var a, b int
-			fmt.Sscanf(string(mulStatement), "mul(%d,%d)", &a, &b)
+			fmt.Sscanf(s, "mul(%d,%d)", &a, &b)
 			result += a * b
 		}
 	}
