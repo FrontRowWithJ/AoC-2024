@@ -7,9 +7,7 @@ import (
 )
 
 func main() {
-	input, err := os.ReadFile("../input.txt")
-	if err != nil {
-		panic(err)
-	}
+	input, _ := os.ReadFile("../input.txt")
 	lines := strings.Split(strings.TrimSpace(string(input)), "\n")
+
 }
