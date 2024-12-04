@@ -14,19 +14,17 @@ fi
 
 function make_solution_folder() {
   folder_name="solution_$1"
-  mkdir $folder_name
-  cd $folder_name
+  mkdir "$folder_name"
+  cd "$folder_name" || exit 1
   cat "../../solution-template.go" >> main.go
   go mod init main.go
   cd ..
 }
 
 mkdir "day_${DAY_NUMBER}"
-cd "day_${DAY_NUMBER}"
+cd "day_${DAY_NUMBER}" || exit 1
 
-curl -H "Cookie: $(cat .env)" \
-      -o "input.txt" \
-      "https://adventofcode.com/2024/day/${DAY_NUMBER}/input"
+curl --cookie "$(cat ../.env)" -o "input.txt" "https://adventofcode.com/2024/day/${DAY_NUMBER}/input"
 
 make_solution_folder "0"
 make_solution_folder "1"

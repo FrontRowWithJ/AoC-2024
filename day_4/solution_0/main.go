@@ -6,50 +6,11 @@ import (
 	"strings"
 )
 
-func findHorizontal(lines []string) int {
+func find(lines []string, offSetI, offsetJ []int, iLimit, jLimit, jStart int) int {
 	result := 0
-	for _, line := range lines {
-		for i := 0; i < len(line)-3; i++ {
-			word := line[i : i+4]
-			if word == "XMAS" || word == "SAMX" {
-				result += 1
-			}
-		}
-	}
-	return result
-}
-
-func findVertical(lines []string) int {
-	result := 0
-	for i := 0; i < len(lines)-3; i++ {
-		for j := 0; j < len(lines[0]); j++ {
-			word := string(lines[i][j]) + string(lines[i+1][j]) + string(lines[i+2][j]) + string(lines[i+3][j])
-			if word == "XMAS" || word == "SAMX" {
-				result += 1
-			}
-		}
-	}
-	return result
-}
-
-func findDiagonalForward(lines []string) int {
-	result := 0
-	for i := 0; i < len(lines)-3; i++ {
-		for j := 0; j < len(lines[i])-3; j++ {
-			word := string(lines[i][j]) + string(lines[i+1][j+1]) + string(lines[i+2][j+2]) + string(lines[i+3][j+3])
-			if word == "XMAS" || word == "SAMX" {
-				result += 1
-			}
-		}
-	}
-	return result
-}
-
-func findDiagonalBackward(lines []string) int {
-	result := 0
-	for i := 0; i < len(lines)-3; i++ {
-		for j := 3; j < len(lines[i]); j++ {
-			word := string(lines[i][j]) + string(lines[i+1][j-1]) + string(lines[i+2][j-2]) + string(lines[i+3][j-3])
+	for i := 0; i < len(lines)-iLimit; i++ {
+		for j := jStart; j < len(lines[i])-jLimit; j++ {
+			word := string(lines[i+offSetI[0]][j+offsetJ[0]]) + string(lines[i+offSetI[1]][j+offsetJ[1]]) + string(lines[i+offSetI[2]][j+offsetJ[2]]) + string(lines[i+offSetI[3]][j+offsetJ[3]])
 			if word == "XMAS" || word == "SAMX" {
 				result += 1
 			}
@@ -61,5 +22,7 @@ func findDiagonalBackward(lines []string) int {
 func main() {
 	input, _ := os.ReadFile("../input.txt")
 	lines := strings.Split(strings.TrimSpace(string(input)), "\n")
-	fmt.Println(findDiagonalBackward(lines) + findDiagonalForward(lines) + findVertical(lines) + findHorizontal(lines))
+	a := find(lines, []int{0, 0, 0, 0}, []int{0, 1, 2, 3}, 0, 3, 0) + find(lines, []int{0, 1, 2, 3}, []int{0, 0, 0, 0}, 3, 0, 0)
+	b := find(lines, []int{0, 1, 2, 3}, []int{0, 1, 2, 3}, 3, 3, 0) + find(lines, []int{0, 1, 2, 3}, []int{0, -1, -2, -3}, 3, 0, 3)
+	fmt.Println(a + b)
 }
