@@ -18,9 +18,7 @@ func main() {
 		fmt.Sscanf(line, "%d   %d", &list0[i], &list1[i])
 		counts1[list1[i]]++
 	}
-
 	result := 0
-
 	for _, n := range list0 {
 		result += n * counts1[n]
 	}

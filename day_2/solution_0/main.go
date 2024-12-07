@@ -14,17 +14,16 @@ func abs(x int) int {
 	return x
 }
 
-func isIncreasingOrDecreasing(arr []int) bool {
+func isIncreasingOrDecreasing(arr []int) int {
 	isIncreasing := arr[0] < arr[1]
 	for i := 0; i < len(arr)-1; i++ {
 		diff := arr[i+1] - arr[i]
 		absDiff := abs(diff)
-
 		if (isIncreasing != (diff > 0)) || absDiff < 1 || absDiff > 3 {
-			return false
+			return 0
 		}
 	}
-	return true
+	return 1
 }
 
 func main() {
@@ -35,14 +34,12 @@ func main() {
 	lines := strings.Split(strings.TrimSpace(string(input)), "\n")
 	total := 0
 	for _, line := range lines {
-		var arr []int
-		for _, s := range strings.Fields(line) {
-			n, _ := strconv.ParseInt(s, 10, 32)
-			arr = append(arr, int(n))
+		ss := strings.Fields(line)
+		arr := make([]int, len(ss))
+		for i, s := range ss {
+			arr[i], _ = strconv.Atoi(s)
 		}
-		if isIncreasingOrDecreasing(arr) {
-			total += 1
-		}
+		total += isIncreasingOrDecreasing(arr)
 	}
 	fmt.Println(total)
 }

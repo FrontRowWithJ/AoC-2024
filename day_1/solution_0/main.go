@@ -27,7 +27,6 @@ func main() {
 	slices.Sort(list0)
 	slices.Sort(list1)
 	result := 0
-
 	for i := 0; i < len(list0); i++ {
 		result += abs(list0[i] - list1[i])
 	}
