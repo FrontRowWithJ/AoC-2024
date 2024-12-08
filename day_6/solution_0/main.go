@@ -7,15 +7,10 @@ import (
 	"strings"
 )
 
-type Point struct {
-	X int
-	Y int
-}
-
 func main() {
 	input, _ := os.ReadFile("../input.txt")
 	lines := strings.Split(strings.TrimSpace(string(input)), "\n")
-	grid := map[Point]bool{}
+	grid := map[[2]int]bool{}
 	var i, j int
 	for i = 0; i < len(lines); i++ {
 		j = slices.Index(strings.Split(lines[i], ""), "^")
@@ -23,7 +18,7 @@ func main() {
 			break
 		}
 	}
-	grid[Point{i, j}] = true
+	grid[[2]int{i, j}] = true
 	directionI := []int{-1, 0, 1, 0}
 	directionJ := []int{0, 1, 0, -1}
 	directionIndex := 0
@@ -36,7 +31,7 @@ func main() {
 			i, j = i-directionI[directionIndex], j-directionJ[directionIndex]
 			directionIndex = (directionIndex + 1) % 4
 		} else {
-			grid[Point{i, j}] = true
+			grid[[2]int{i, j}] = true
 		}
 	}
 	fmt.Println(len(grid))
