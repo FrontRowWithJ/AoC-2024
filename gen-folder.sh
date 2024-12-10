@@ -28,3 +28,6 @@ curl --cookie "$(cat ../.env)" -o "input.txt" "https://adventofcode.com/2024/day
 
 make_solution_folder "0"
 make_solution_folder "1"
+
+cd solution_0
+code main.go
