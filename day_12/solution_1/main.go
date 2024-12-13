@@ -66,36 +66,27 @@ func main() {
 		slices.SortFunc(rights, func(a Point, b Point) int { return (a.j*len(lines) + a.i) - (b.j*len(lines) + b.i) })
 		slices.SortFunc(lefts, func(a Point, b Point) int { return (a.j*len(lines) + a.i) - (b.j*len(lines) + b.i) })
 		numOfSides := 4
-		currI := tops[0].i
 		for idx := 0; idx < len(tops)-1; idx++ {
-			if tops[idx+1].j != tops[idx].j+1 || currI != tops[idx+1].i {
+			if tops[idx+1].j != tops[idx].j+1 || tops[idx].i != tops[idx+1].i {
 				numOfSides++
-				currI = tops[idx+1].i
 			}
 		}
-
-		currI = bottoms[0].i
 		for idx := 0; idx < len(bottoms)-1; idx++ {
-			if bottoms[idx+1].j != bottoms[idx].j+1 || currI != bottoms[idx+1].i {
+			if bottoms[idx+1].j != bottoms[idx].j+1 || bottoms[idx].i != bottoms[idx+1].i {
 				numOfSides++
-				currI = bottoms[idx+1].i
 			}
 		}
-		currJ := lefts[0].j
 		for idx := 0; idx < len(lefts)-1; idx++ {
-			if lefts[idx+1].i != lefts[idx].i+1 || currJ != lefts[idx+1].j {
+			if lefts[idx+1].i != lefts[idx].i+1 || lefts[idx].j != lefts[idx+1].j {
 				numOfSides++
-				currJ = lefts[idx+1].j
 			}
 		}
-		currJ = rights[0].j
 		for idx := 0; idx < len(rights)-1; idx++ {
-			if rights[idx+1].i != rights[idx].i+1 || currJ != rights[idx+1].j {
+			if rights[idx+1].i != rights[idx].i+1 || rights[idx].j != rights[idx+1].j {
 				numOfSides++
-				currJ = rights[idx+1].j
 			}
 		}
-		price += len(points) * numOfSides
+		price += len(points) * (numOfSides)
 	}
 	println(price)
 }
