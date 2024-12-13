@@ -15,13 +15,10 @@ func main() {
 		fmt.Sscanf(lines[i+0], "Button A: X+%d, Y+%d", &aX, &aY)
 		fmt.Sscanf(lines[i+1], "Button B: X+%d, Y+%d", &bX, &bY)
 		fmt.Sscanf(lines[i+2], "Prize: X=%d, Y=%d", &prizeX, &prizeY)
-		D := aX*bY - bX*aY
-		Dx := prizeX*bY - bX*prizeY
-		Dy := aX*prizeY - prizeX*aY
-		if D == 0 || Dx != (Dx/D)*D || Dy != (Dy/D)*D {
-			continue
+		D, Dx, Dy := aX*bY-bX*aY, prizeX*bY-bX*prizeY, aX*prizeY-prizeX*aY
+		if D != 0 && Dx == (Dx/D)*D && Dy == (Dy/D)*D {
+			totalTokens += (Dx/D)*3 + (Dy / D)
 		}
-		totalTokens += (Dx/D)*3 + (Dy/D)
 	}
 	fmt.Println(totalTokens)
 }
