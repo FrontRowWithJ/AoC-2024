@@ -13,9 +13,9 @@ func main() {
 		var aX, aY, bX, bY, prizeX, prizeY int
 		fmt.Sscanf(s, "Button A: X+%d, Y+%d\nButton B: X+%d, Y+%d\nPrize: X=%d, Y=%d",
 			&aX, &aY, &bX, &bY, &prizeX, &prizeY)
-		D, Dx, Dy := aX*bY-bX*aY, prizeX*bY-bX*prizeY, aX*prizeY-prizeX*aY
-		if D != 0 && Dx == (Dx/D)*D && Dy == (Dy/D)*D {
-			totalTokens += (Dx/D)*3 + (Dy / D)
+		det, detX, detY := aX*bY-bX*aY, prizeX*bY-bX*prizeY, aX*prizeY-prizeX*aY
+		if det != 0 && detX%det == 0 && detY%det == 0 {
+			totalTokens += detX/det*3 + detX/det
 		}
 	}
 	fmt.Println(totalTokens)
